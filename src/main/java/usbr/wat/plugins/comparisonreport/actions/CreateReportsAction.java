@@ -62,6 +62,7 @@ import usbr.wat.plugins.actionpanel.ActionsWindow;
 import usbr.wat.plugins.actionpanel.io.ReportXmlFile;
 import usbr.wat.plugins.actionpanel.model.ReportPlugin;
 import usbr.wat.plugins.actionpanel.model.ReportsManager;
+import usbr.wat.plugins.actionpanel.model.SimulationReportInfo;
 
 /**
  * @author Mark Ackerman
@@ -116,7 +117,7 @@ public class CreateReportsAction extends AbstractAction
 		
 		WatSimulation sim;
 		long t1 = System.currentTimeMillis();
-		List<WatSimulation>sims = _parent.getSelectedSimulations();
+		List<SimulationReportInfo> sims = _parent.getSimulationReportInfos();
 		String xmlFile = createSimulationXmlFile(sims);
 		if ( xmlFile != null )
 		{
@@ -161,7 +162,7 @@ public class CreateReportsAction extends AbstractAction
 	/**
 	 * @param sim
 	 */
-	private String createSimulationXmlFile(List<WatSimulation> sims)
+	private String createSimulationXmlFile(List<SimulationReportInfo> sims)
 	{
 		Project prj = Project.getCurrentProject();
 		String studyDir = prj.getProjectDirectory();
@@ -174,16 +175,16 @@ public class CreateReportsAction extends AbstractAction
 		
 		ReportXmlFile xmlFile = new ReportXmlFile(filename);
 		xmlFile.setStudyInfo(studyDir, getObsDataPath(studyDir));
-		List<WatSimulation>simList = new ArrayList<>();
+		List<SimulationReportInfo>simList = new ArrayList<>();
 		simList.addAll(sims);
-		xmlFile.setSimulations(_parent.getSimulationGroup().getName(), sims);
+		xmlFile.setSimulationInfo(_parent.getSimulationGroup().getName(), sims);
 		if (  xmlFile.createXMLFile() )
 		{
 			return filename;
 		}
 		return null;
 	}
-	
+	/*
 	private void runSimulationReport(WatSimulation sim)
 	{
 		List<ModelAlternative> modelAlts = sim.getAllModelAlternativeList();
@@ -233,6 +234,7 @@ public class CreateReportsAction extends AbstractAction
 		}
 		
 	}
+	*/
 	/**
 	 * @return
 	 */
@@ -568,14 +570,14 @@ public class CreateReportsAction extends AbstractAction
 	/**
 	 * @param sim
 	 */
-	public boolean runJasperReport(WatSimulation sim)
+	public boolean runJasperReport(SimulationReportInfo sim)
 	{
 		long t1 = System.currentTimeMillis();
 		try
 		{
 			//Log log = LogFactory.getLog(JasperFillManager.class);
 			String studyDir = Project.getCurrentProject().getProjectDirectory();
-			String simDir = sim.getSimulationDirectory();
+			String simDir = sim.getSimFolder();
 			String jasperRepoDir = RMAIO.concatPath(studyDir, REPORT_DIR);
 			String rptFile = RMAIO.concatPath(jasperRepoDir, JASPER_FILE);
 			//rptFile = RMAIO.concatPath(rptFile, JASPER_FILE);
@@ -628,8 +630,8 @@ public class CreateReportsAction extends AbstractAction
 			params.put("p_ReportFolder", jasperRepoDir);
 			params.put(WATERSHED_NAME_PARAM, Project.getCurrentProject().getName());
 			params.put(SIMULATION_NAME_PARAM, sim.getName());
-			params.put(ANALYSIS_START_TIME_PARAM, sim.getRunTimeWindow().getStartTime().toString());
-			params.put(ANALYSIS_END_TIME_PARAM, sim.getRunTimeWindow().getEndTime().toString());
+			params.put(ANALYSIS_START_TIME_PARAM, sim.getSimulation().getRunTimeWindow().getStartTime().toString());
+			params.put(ANALYSIS_END_TIME_PARAM, sim.getSimulation().getRunTimeWindow().getEndTime().toString());
 			Date date = new Date(sim.getLastComputedDate());
 			SimpleDateFormat fmt = new SimpleDateFormat("MMMM dd, yyyy HH:mm");
 
