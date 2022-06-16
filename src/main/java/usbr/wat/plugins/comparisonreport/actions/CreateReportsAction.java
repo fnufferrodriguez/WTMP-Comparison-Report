@@ -82,12 +82,11 @@ public class CreateReportsAction extends AbstractReportAction
 		_parent = parent;
 	}
 	
-	public boolean createReport(ReportOptions options)
+	public boolean createReport(List<SimulationReportInfo> sims, ReportOptions options)
 	{
 		
 		WatSimulation sim;
 		long t1 = System.currentTimeMillis();
-		List<SimulationReportInfo> sims = _parent.getSimulationReportInfos();
 		String xmlFile = createSimulationXmlFile(sims);
 		if ( xmlFile != null )
 		{
