@@ -5,7 +5,7 @@
 		<groupId>usbr.wat.plugins</groupId>
 		<artifactId>usbr-wat-plugins-parent</artifactId>
 		<version>local-SNAPSHOT</version>
-		<relativePath>../</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>usbr-comparison-report</artifactId>
@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>usbr.wat.plugins</groupId>
 			<artifactId>usbr-actionpanel-plugin</artifactId>
-			<version>local-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.python</groupId>
