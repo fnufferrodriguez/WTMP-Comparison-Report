@@ -201,6 +201,7 @@ public class CreateReportsAction extends AbstractReportAction
 			String jasperRepoDir = RMAIO.concatPath(studyDir, REPORT_DIR);
 			String rptFile = RMAIO.concatPath(jasperRepoDir, JASPER_FILE);
 			String installDir = System.getProperty("user.dir");
+			installDir = RMAIO.getDirectoryFromPath(installDir);
 			//rptFile = RMAIO.concatPath(rptFile, JASPER_FILE);
 
 
