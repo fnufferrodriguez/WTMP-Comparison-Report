@@ -59,6 +59,7 @@ public class CreateReportsAction extends AbstractReportAction
 	
 	
 	private static final String SCRIPTS_DIR = "scripts";
+	private static final String MAVEN_PATH = "usbr.wat.plugins/usbr-comparison-report";
 	
 	private ActionsWindow _parent;
 	
@@ -309,6 +310,12 @@ public class CreateReportsAction extends AbstractReportAction
 	public static void main(String[] args)
 	{
 		EventQueue.invokeLater(()->register());
+	}
+
+	@Override
+	public String getMavenPath()
+	{
+		return MAVEN_PATH;
 	}
 
 }
