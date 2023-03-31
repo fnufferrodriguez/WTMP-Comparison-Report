@@ -66,9 +66,9 @@ public class CreateReportsAction extends AbstractReportAction
 	private PythonInterpreter  _interp;
 	private PyCode _pycode;
 	
-	public CreateReportsAction(ActionsWindow parent)
+	public CreateReportsAction(ActionsWindow parent )
 	{
-		super("Create Reports");
+		super("Create Reports", null);
 		setEnabled(false);
 		_parent = parent;
 	}
