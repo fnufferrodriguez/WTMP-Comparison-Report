@@ -17,7 +17,7 @@ jar {
 
 publishing {
     publications {
-        maven(MavenPublication) {
+        mavenJava(MavenPublication) {
             artifactId = "usbr-comparison-report"
             from components.java
         }
