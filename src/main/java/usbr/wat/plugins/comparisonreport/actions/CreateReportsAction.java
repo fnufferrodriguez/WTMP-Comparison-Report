@@ -112,7 +112,7 @@ public class CreateReportsAction extends AbstractReportAction
 		xmlFile.setStudyInfo(studyDir, getObsDataPath(studyDir));
 		List<SimulationReportInfo>simList = new ArrayList<>();
 		simList.addAll(sims);
-		xmlFile.setSimulationInfo(_parent.getSimulationGroup().getName(), sims);
+		xmlFile.setSimulationInfo(ActionPanelPlugin.getInstance().getActionsWindow().getSimulationGroup().getName(), sims);
 		if (  xmlFile.createXMLFile() )
 		{
 			return filename;
