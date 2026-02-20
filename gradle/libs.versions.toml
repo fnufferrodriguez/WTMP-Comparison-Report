@@ -1,0 +1,15 @@
+[versions]
+wtmp-actionpanel-plugin = "changeme"
+junit-version = "5.14.2"
+
+[libraries]
+wtmp-actionpanel-plugin = { module = "usbr.wat.plugins:usbr-actionpanel-plugin", version.ref = "wtmp-actionpanel-plugin" }
+
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit-version" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
+junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+[bundles]
+junit-api = ["junit-jupiter-api"]
+junit-runtime = ["junit-launcher", "junit-jupiter-engine"]

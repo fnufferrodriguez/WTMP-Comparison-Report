@@ -1,13 +1,18 @@
 plugins {
-    id "java-library"
-    id "maven-publish"
+    id "wtmp.deps-conventions"
+    id "wtmp.java-conventions"
+    id "wtmp.publishing-conventions"
+    id "wtmp.versioning-conventions"
 }
 
 dependencies {
-    def rootProject = project(":");
-    implementation project(":usbr-actionpanel-plugin")
+    implementation libs.wtmp.actionpanel.plugin
 }
 
+allprojects {
+    group = 'usbr.wat.plugins'
+    version = versionConventions.getConventionVersion()
+}
 
 jar {
     manifest {
@@ -22,9 +27,4 @@ publishing {
             from components.java
         }
     }
-}
-
-compileJava {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
 }
